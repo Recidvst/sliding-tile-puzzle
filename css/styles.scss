@@ -18,10 +18,10 @@ body {
 	position: relative;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: minmax(200px, auto) minmax(200px, auto) minmax(200px, auto); 
-	width: 620px;
-	max-width: 620px;
+  grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: minmax(200px, auto) minmax(200px, auto) minmax(200px, auto) minmax(200px, auto); 
+	width: 830px;
+	max-width: 830px;
 	flex-wrap: wrap;
 }
 
@@ -32,7 +32,7 @@ body {
 	width: 100%;
 	border-radius: 1px;
 	box-shadow: 1px 1px 3px 0px grey;
-	background-size: 600px 600px; // this is the size of the container
+	background-size: 930px 930px; // this is the size of the container
 	background-position: center; // this should be based on the distance from the container edges
 	background-image: url('https://raw.githubusercontent.com/Recidvst/recidvst-images/master/lake-cabin-min.jpg');
 	// the empty tile
