@@ -1,17 +1,17 @@
 // id generator
 function guidGenerator() {
-    var S4 = function() {
-       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-    };
-    return (S4()+S4());
+  var S4 = function() {
+     return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+  };
+  return (S4()+S4());
 }
 
 // random shufflers
 function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
+  for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+  }
 }
 function shuffleItems(list) {
 	for (var i = list.children.length; i >= 0; i--) {

@@ -1,27 +1,68 @@
+:root {
+	--primary-bg-color: #e3e3e3;
+	--secondary-bg-color: #001d1e;
+	--positive-color: #b4654a;
+	--positive-color-bright: #f2693b;
+	--setback-color: #c2c5bb;
+
+	--tile-width: 200px;
+	--columns-num: 4;
+}
+
 body {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
-	background: #f4f4f4;
+	background: var(--secondary-bg-color);
+	font-family: 'MuseoModerno', cursive;
+}
+
+.title-holder {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	margin: 15px 0 30px;
+	h1 {
+		color: var(--positive-color-bright);
+	}
+	h2 {
+    margin: 5px 0;
+    font-size: 1.5em;
+		color: var(--secondary-bg-color);
+	}	
+	h3 {
+    margin: 5px 0;
+    font-size: 1.5em;
+		color: var(--secondary-bg-color);
+	}
+}
+.disclaimer {
+	margin: 0;
+	margin-top: auto;
+	color: var(--secondary-bg-color);
 }
 
 .sliding-tile-puzzle {
 	position: relative;
-	padding: 10px;
-	background: #e6e6e6;
-	border-radius: 2px;
-	border: 2px solid #e4e4e4;
+	padding: 20px;
+	background: var(--primary-bg-color);
+	border-radius: 4px;
+	border: 2px solid var(--primary-bg-color);
+	display: grid;
+	grid-template-columns: 1fr auto;
+	grid-template-rows: 1fr;
 }
 
 .tile-container {
 	position: relative;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(4, 1fr);
-	grid-template-rows: minmax(200px, auto) minmax(200px, auto) minmax(200px, auto) minmax(200px, auto); 
-	width: 830px;
-	max-width: 830px;
+	grid-template-columns: repeat(var(--columns-num), 1fr);
+	grid-template-rows: repeat(var(--columns-num), minmax(var(--tile-width), auto));
+	width: calc( (var(--columns-num) * var(--tile-width)) + calc(var(--columns-num) * 10px) );
+	max-width: calc( (var(--columns-num) * var(--tile-width)) + calc(var(--columns-num) * 10px) );
 	flex-wrap: wrap;
 }
 
@@ -30,11 +71,11 @@ body {
 	flex: 0 1 auto;
 	height: 100%;
 	width: 100%;
-	border-radius: 1px;
+	border-radius: 2px;
 	box-shadow: 1px 1px 3px 0px grey;
 	background-size: 930px 930px; // this is the size of the container
 	background-position: center; // this should be based on the distance from the container edges
-	background-image: url('https://raw.githubusercontent.com/Recidvst/recidvst-images/master/lake-cabin-min.jpg');
+	background-image: url('./../img/lake-cabin.jpg');
 	// the empty tile
 	&.open, &.empty {
 		background: transparent;
@@ -48,31 +89,38 @@ body {
 	}
 }
 
-.buttons-container {
+.controls-container {
 	display: block;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	flex-direction: column;
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	max-height: 100%;
-	transform: translate(-100%, -2px);
-	padding: 0 0 0 10px;
-	background: #e6e6e6;
-	border: 2px solid #e6e6e6;
+	padding: 0 20px 0 0;
+	background: var(--primary-bg-color);
+	border: 2px solid var(--primary-bg-color);
 	border-right: none;
+	width: 100%;
+	max-width: 300px;
+}
+// reference image
+.reference-img {
+	display: block;
+	width: 100%;
+	max-width: calc(100% - 8px);
+	margin: 5px auto;
+	padding: 2px;
+	border: 2px solid var(--secondary-bg-color);
+	border-radius: 2px;
+	background: var(--primary-bg-color);
 }
 .control-button {
 	display: block;
 	width: 100%;
 	padding: 10px 16px;
 	margin: 5px auto;
-	background: #5e7298;
-	border: 1px solid #5e7298; 
-	color: white;
+	background: var(--positive-color);
+	border: 1px solid var(--positive-color);
+	color: #333;
 	font-size: 18px;
 	border-radius: 2px;
 	&:hover {
@@ -80,15 +128,11 @@ body {
 	}
 	// disabled state
 	&:disabled {
-		background: #c5c5c5;
-		border-color: #c5c5c5;
+		background: var(--setback-color);
+		border-color: var(--setback-color);
+		color: #333;
 		&:hover {
 			cursor: not-allowed;
 		}
 	}
 }
-
-
-/** TODOS */
-// add tooltip to tiles
-// animate tiles on movement

@@ -1,0 +1,18 @@
+# dependencies
+node_modules
+
+# logs
+npm-debug.log
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+package-lock.json
+yarn-lock
+
+nohup.out
+
+# misc
+.DS_Store
+
+.cache
