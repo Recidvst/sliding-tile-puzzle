@@ -2,11 +2,11 @@
   "name": "sliding-tile-puzzle",
   "version": "1.0.0",
   "description": "A javascript and css grid game based on the old sliding tile puzzle games where the player has to re-arrange a jumbled picture by sliding tiles around a fixed 2d board.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel index.html",
-    "build": "parcel build js/app.js"
+    "build": "SET NODE_ENV=development & parcel build index.html"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Recidvst/sliding-tile-puzzle#readme",
   "devDependencies": {
+    "cssnano": "^4.1.10",
     "sass": "^1.26.9"
   }
 }
