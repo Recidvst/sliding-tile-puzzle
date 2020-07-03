@@ -247,8 +247,21 @@ function triggerTileMovement(thisTile, currentTiles) {
 	
 }
 
+// shuffle animation
+function shuffleAnimation() {
+	let tl = new TimelineMax();
+	tl.to(".sliding-tile-puzzle .tile", 1, {scale: 0.75, rotate: '360deg', opacity: 0, ease: "power3.easeIn", stagger: { grid: [4,4], from: "random", amount: 1}})
+	tl.to(".sliding-tile-puzzle .tile", 1, {scale: 1, rotate: '0deg', opacity: 1, ease: "power3.easeOut", stagger: { grid: [4,4], from: "random", amount: 1}})
+}
+
 // kick off functionality
 window.addEventListener('load', () => {
+
+	// load in animation
+	let tl = new TimelineMax();
+	tl.fromTo(".sliding-tile-puzzle", 1.5, {x: '-100%'}, {x: '0', ease: Power4.easeInOut})
+	.fromTo(".sliding-tile-puzzle .tile", 1, {scale: '0', rotate: '-90deg'}, {scale: '1', rotate: '0deg', ease: Power4.easeInOut}, .5)
+
 	// init required vars
 	const startTiles = [...document.querySelectorAll('.tile')];
 	let memory = [];
@@ -282,8 +295,11 @@ window.addEventListener('load', () => {
 	// start
 	startButton.addEventListener('click', (e) => {
 		if (!startButton.hasAttribute('disabled')) {
-			shuffleItems(tileContainer);
-			setOpenTile(startTiles);
+			shuffleAnimation();
+			setTimeout( () => {
+				shuffleItems(tileContainer);
+				setOpenTile(startTiles);
+			}, 2000);
 			startButton.setAttribute('disabled', true);
 		}
 		if (resetButton.hasAttribute('disabled')) {
@@ -295,7 +311,10 @@ window.addEventListener('load', () => {
 	resetButton.addEventListener('click', (e) => {
 		const currentTiles = [...document.querySelectorAll('.tile')];
 		if (!resetButton.hasAttribute('disabled')) {
-			resetGrid(startTiles, tileContainer);
+			shuffleAnimation();
+			setTimeout( () => {
+				resetGrid(startTiles, tileContainer);
+			}, 2000);
 			resetButton.setAttribute('disabled', true);
 		}
 		if (startButton.hasAttribute('disabled')) {

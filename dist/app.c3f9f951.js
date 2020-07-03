@@ -392,11 +392,53 @@ function triggerTileMovement(thisTile, currentTiles) {
       }
     }
   });
+} // shuffle animation
+
+
+function shuffleAnimation() {
+  var tl = new TimelineMax();
+  tl.to(".sliding-tile-puzzle .tile", 1, {
+    scale: 0.75,
+    rotate: '360deg',
+    opacity: 0,
+    ease: "power3.easeIn",
+    stagger: {
+      grid: [4, 4],
+      from: "random",
+      amount: 1
+    }
+  });
+  tl.to(".sliding-tile-puzzle .tile", 1, {
+    scale: 1,
+    rotate: '0deg',
+    opacity: 1,
+    ease: "power3.easeOut",
+    stagger: {
+      grid: [4, 4],
+      from: "random",
+      amount: 1
+    }
+  });
 } // kick off functionality
 
 
 window.addEventListener('load', function () {
-  // init required vars
+  // load in animation
+  var tl = new TimelineMax();
+  tl.fromTo(".sliding-tile-puzzle", 1.5, {
+    x: '-100%'
+  }, {
+    x: '0',
+    ease: Power4.easeInOut
+  }).fromTo(".sliding-tile-puzzle .tile", 1, {
+    scale: '0',
+    rotate: '-90deg'
+  }, {
+    scale: '1',
+    rotate: '0deg',
+    ease: Power4.easeInOut
+  }, .5); // init required vars
+
   var startTiles = _toConsumableArray(document.querySelectorAll('.tile'));
 
   var memory = [];
@@ -432,8 +474,11 @@ window.addEventListener('load', function () {
 
   startButton.addEventListener('click', function (e) {
     if (!startButton.hasAttribute('disabled')) {
-      shuffleItems(tileContainer);
-      setOpenTile(startTiles);
+      shuffleAnimation();
+      setTimeout(function () {
+        shuffleItems(tileContainer);
+        setOpenTile(startTiles);
+      }, 2000);
       startButton.setAttribute('disabled', true);
     }
 
@@ -448,7 +493,10 @@ window.addEventListener('load', function () {
     var currentTiles = _toConsumableArray(document.querySelectorAll('.tile'));
 
     if (!resetButton.hasAttribute('disabled')) {
-      resetGrid(startTiles, tileContainer);
+      shuffleAnimation();
+      setTimeout(function () {
+        resetGrid(startTiles, tileContainer);
+      }, 2000);
       resetButton.setAttribute('disabled', true);
     }
 
@@ -487,7 +535,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56845" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58950" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

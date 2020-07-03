@@ -69,13 +69,14 @@ body {
 .tile {
 	display: block;
 	flex: 0 1 auto;
-	height: 100%;
-	width: 100%;
+	height: var(--tile-width);
+	width: var(--tile-width);
 	border-radius: 2px;
 	box-shadow: 1px 1px 3px 0px grey;
-	background-size: 930px 930px; // this is the size of the container
+	background-size: calc( (var(--columns-num) * var(--tile-width)) + calc(var(--columns-num) * 10px) ) calc( (var(--columns-num) * var(--tile-width)) + calc(var(--columns-num) * 10px) ); // this is the size of the container
 	background-position: center; // this should be based on the distance from the container edges
 	background-image: url('./../img/lake-cabin.jpg');
+	transform-origin: center center;
 	// the empty tile
 	&.open, &.empty {
 		background: transparent;
