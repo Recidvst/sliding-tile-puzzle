@@ -140,6 +140,10 @@ body {
 }
 
 // swal alerts - custom styling
+// overlay
+.swal-overlay {
+	z-index: 99;
+}
 // buttons
 .swal-button {
 	display: block;
@@ -177,40 +181,74 @@ body {
 	border-color: rgba(180, 101, 74, 0.75);
 }
 
-// success animation
+// success emojis animation
 @keyframes party-fade-in {
   from { opacity: 0 }
   to { opacity: 1 }
 }
-.notes {
+.success-emojis {
+	display: none; // hidden until popup shown
   position: absolute;
-  top: calc(50% - 20px);
-  left: 50%;
-  z-index: -1;
-  animation: party-fade-in 100ms 2s linear backwards;
+	z-index: 100;
+  animation: party-fade-in 100ms linear backwards;
+	transform-origin: center center;
   div {
     position: absolute;
     top: 0;
-    left:0;
-    $length: 10;
+    left: 0;
+    $length: 12;
     @for $i from 1 through 12 {
       &:nth-child(#{$i}) {
-        animation: notesFade#{$i} (random()*2s+0.5s) (random()*2s) ease-out infinite both;
+        animation: notesFade#{$i} (random()*3s+1s) ease-out infinite both;
         color: hsl(($i / $length)*360deg, 50%, 50%);
-        font-size: random() * 2rem + 0.5rem;
+        font-size: random() * 2rem + 1rem;
       }
       @keyframes notesFade#{$i} {
         0% {
           opacity: 0;
         }
-        20%{
+        20% {
           opacity: 1;
-        }
+				}
+				75% {
+          opacity: 0.75;
+				}
         100% {
-          transform: rotate(random()*50deg - 25deg) translateY(random() * -100px - 100px);
+          transform: rotate(random()*50deg - 25deg) translateY(random() * -30vh - 30vh) translateX(random() * 25px - 25px);
           opacity: 0;
         }
       }
     }
   }
+}
+// locations
+.success-emojis--top-left {
+	position: fixed;
+	top: 50px;
+	left: 50px;
+	transform: rotate(135deg);
+}
+.success-emojis--top-right {
+	position: fixed;
+	top: 50px;
+	right: 50px;
+	transform: rotate(-135deg);
+}
+.success-emojis--bottom-left {	
+	position: fixed;
+	bottom: 50px;
+	left: 50px;
+	transform: rotate(45deg);
+}
+.success-emojis--bottom-right {
+	position: fixed;
+	bottom: 50px;
+	right: 50px;
+	transform: rotate(-45deg);	
+}
+// show/hide control
+body.success {
+	.success-emojis {
+		display: block;
+	}
 }

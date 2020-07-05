@@ -283,8 +283,9 @@ window.addEventListener('load', () => {
 				triggerTileMovement(e.target, currentTiles);
 				// check if puzzle now complete
 				setTimeout(() => {
-					if (true !== false) {
-					// if (puzzleCompleteCheck(memory) && !tileContainer.classList.contains('complete')) {
+					if (puzzleCompleteCheck(memory) && !tileContainer.classList.contains('complete')) {
+						const body = document.getElementsByTagName("BODY")[0];
+						body.classList.add('success');
 						tileContainer.classList.add('complete');
 						// handle alert popup
 						swal({
@@ -306,6 +307,7 @@ window.addEventListener('load', () => {
 									startButton.setAttribute('disabled', true);
 									break;
 							}
+							body.classList.remove('success');
 						});
 					}
 				}, 100);

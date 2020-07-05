@@ -469,8 +469,9 @@ window.addEventListener('load', function () {
         triggerTileMovement(e.target, currentTiles); // check if puzzle now complete
 
         setTimeout(function () {
-          if (true !== false) {
-            // if (puzzleCompleteCheck(memory) && !tileContainer.classList.contains('complete')) {
+          if (puzzleCompleteCheck(memory) && !tileContainer.classList.contains('complete')) {
+            var body = document.getElementsByTagName("BODY")[0];
+            body.classList.add('success');
             tileContainer.classList.add('complete'); // handle alert popup
 
             (0, _sweetalert.default)({
@@ -491,6 +492,8 @@ window.addEventListener('load', function () {
                   startButton.setAttribute('disabled', true);
                   break;
               }
+
+              body.classList.remove('success');
             });
           }
         }, 100);
@@ -564,7 +567,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60938" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62528" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
