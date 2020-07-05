@@ -1,3 +1,5 @@
+import swal from 'sweetalert';
+
 // id generator
 function guidGenerator() {
   var S4 = function() {
@@ -250,8 +252,8 @@ function triggerTileMovement(thisTile, currentTiles) {
 // shuffle animation
 function shuffleAnimation() {
 	let tl = new TimelineMax();
-	tl.to(".sliding-tile-puzzle .tile", 1, {scale: 0.75, rotate: '360deg', opacity: 0, ease: "power3.easeIn", stagger: { grid: [4,4], from: "random", amount: 1}})
-	tl.to(".sliding-tile-puzzle .tile", 1, {scale: 1, rotate: '0deg', opacity: 1, ease: "power3.easeOut", stagger: { grid: [4,4], from: "random", amount: 1}})
+	tl.to(".sliding-tile-puzzle .tile", .75, {scale: 0.75, rotate: '360deg', opacity: 0, ease: "power3.easeIn", stagger: { grid: [4,4], from: "random", amount: .75}})
+	tl.to(".sliding-tile-puzzle .tile", .75, {scale: 1, rotate: '0deg', opacity: 1, ease: "power3.easeOut", stagger: { grid: [4,4], from: "random", amount: .75}})
 }
 
 // kick off functionality
@@ -281,11 +283,32 @@ window.addEventListener('load', () => {
 				triggerTileMovement(e.target, currentTiles);
 				// check if puzzle now complete
 				setTimeout(() => {
-					if (puzzleCompleteCheck(memory) && !tileContainer.classList.contains('complete')) {
-						alert('Congratulations, you did it! 👏 🥳 🍾');
+					if (true !== false) {
+					// if (puzzleCompleteCheck(memory) && !tileContainer.classList.contains('complete')) {
 						tileContainer.classList.add('complete');
+						// handle alert popup
+						swal({
+							title: "Well done, you did it!!!",
+							icon: "success",
+							buttons: {
+								again: "I want to go again",
+								cancel: true,
+							},
+						})
+						.then((value) => {
+							switch (value) {
+								case "again":
+									shuffleAnimation();
+									setTimeout( () => {
+										shuffleItems(tileContainer);
+										setOpenTile(startTiles);
+									}, 2000);
+									startButton.setAttribute('disabled', true);
+									break;
+							}
+						});
 					}
-				}, 1000);
+				}, 100);
 			}
 		});
 	});
@@ -299,7 +322,7 @@ window.addEventListener('load', () => {
 			setTimeout( () => {
 				shuffleItems(tileContainer);
 				setOpenTile(startTiles);
-			}, 2000);
+			}, 1500);
 			startButton.setAttribute('disabled', true);
 		}
 		if (resetButton.hasAttribute('disabled')) {
@@ -314,7 +337,7 @@ window.addEventListener('load', () => {
 			shuffleAnimation();
 			setTimeout( () => {
 				resetGrid(startTiles, tileContainer);
-			}, 2000);
+			}, 1500);
 			resetButton.setAttribute('disabled', true);
 		}
 		if (startButton.hasAttribute('disabled')) {

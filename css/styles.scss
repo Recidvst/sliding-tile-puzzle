@@ -123,6 +123,7 @@ body {
 	border: 1px solid var(--positive-color);
 	color: #333;
 	font-size: 18px;
+	font-weight: normal;
 	border-radius: 2px;
 	&:hover {
 		cursor: pointer;
@@ -136,4 +137,80 @@ body {
 			cursor: not-allowed;
 		}
 	}
+}
+
+// swal alerts - custom styling
+// buttons
+.swal-button {
+	display: block;
+	width: 100%;
+	padding: 10px 16px;
+	margin: 5px auto;
+	background-color: var(--positive-color);
+	border: 1px solid var(--positive-color);
+	color: var(--primary-bg-color);
+	font-size: 18px;
+	font-weight: normal;
+	border-radius: 2px;
+	&:hover, &:not([disabled]):hover {
+		cursor: pointer;
+		background-color: var(--secondary-bg-color);
+		border-color: var(--secondary-bg-color);
+	}
+}
+.swal-button--cancel {
+	background-color: var(--setback-color);
+	border-color: var(--setback-color);
+	color: #333;
+	&:hover, &:not([disabled]):hover {
+		cursor: pointer;
+		background-color: var(--secondary-bg-color);
+		border-color: var(--secondary-bg-color);
+		color: var(--primary-bg-color);
+	}
+}
+// icon
+.swal-icon--success__line {
+	background-color: var(--positive-color);
+}
+.swal-icon--success__ring {
+	border-color: rgba(180, 101, 74, 0.75);
+}
+
+// success animation
+@keyframes party-fade-in {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+.notes {
+  position: absolute;
+  top: calc(50% - 20px);
+  left: 50%;
+  z-index: -1;
+  animation: party-fade-in 100ms 2s linear backwards;
+  div {
+    position: absolute;
+    top: 0;
+    left:0;
+    $length: 10;
+    @for $i from 1 through 12 {
+      &:nth-child(#{$i}) {
+        animation: notesFade#{$i} (random()*2s+0.5s) (random()*2s) ease-out infinite both;
+        color: hsl(($i / $length)*360deg, 50%, 50%);
+        font-size: random() * 2rem + 0.5rem;
+      }
+      @keyframes notesFade#{$i} {
+        0% {
+          opacity: 0;
+        }
+        20%{
+          opacity: 1;
+        }
+        100% {
+          transform: rotate(random()*50deg - 25deg) translateY(random() * -100px - 100px);
+          opacity: 0;
+        }
+      }
+    }
+  }
 }
